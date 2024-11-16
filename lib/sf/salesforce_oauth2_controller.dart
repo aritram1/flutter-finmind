@@ -95,7 +95,7 @@ class SalesforceAuth2Controller {
     }
   }
 
-  Future<String> loginViaOTP() async{
+  static Future<String> loginViaOTP() async{
     final result = SalesforceCustomRestController.callSalesforceAPI(
       endpointUrl: Constants.LOGIN_VIA_OTP_ENDPOINT, 
       httpMethod: Constants.POST);
