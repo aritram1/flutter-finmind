@@ -62,7 +62,7 @@ class LoginPageState extends State<AppLoginPage> {
           ),
           // Content Section (Owl Image and Buttons)
           Positioned.fill(
-            top: 220, // Adjust this to place content below the wavy section
+            top: 100, // Adjust this to place content below the wavy section
             child: Container(
               color: Colors.transparent, // Let the blue background show through
               padding: const EdgeInsets.all(24.0),
@@ -71,7 +71,7 @@ class LoginPageState extends State<AppLoginPage> {
                 children: [
                   // Image Container
                   Container(
-                    height: 200,
+                    height: 300,
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.primary,
                       image: const DecorationImage(
