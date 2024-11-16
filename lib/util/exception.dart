@@ -1,9 +1,9 @@
 // file : finplan_exception.dart
 
-class CustomException implements Exception {
+class AppException implements Exception {
   final String message;
 
-  CustomException(this.message);
+  AppException(this.message);
 
   @override
   String toString() {

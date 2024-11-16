@@ -15,6 +15,14 @@ class Constants{
   static const String DELETE = 'delete';
   static const String LOGIN = 'login';
   static const String SYNC = 'sync';
+  static const String GET = 'GET';
+  static const String POST = 'POST';
+  // static const String SYNC = 'sync';
+  // static const String SYNC = 'sync';
+  // static const String SYNC = 'sync';
+
+  static const String LOGIN_VIA_OTP_ENDPOINT = 'wwwgoogle.com';
+
   static const String DELETE_MESSAGES = 'delete_messages';
   static const String DELETE_TRANSACTIONS = 'delete_transactions';
   static const String APPROVE_MESSAGES = 'approve_messages';

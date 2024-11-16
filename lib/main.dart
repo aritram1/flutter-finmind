@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:finmind/constants.dart';
-import 'package:finmind/splash.dart';
+import 'package:finmind/screens/login_via_otp_page.dart';
+import 'package:finmind/util/constants.dart';
+import 'package:finmind/screens/app_splash_page.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Logger().d('Oh hello!');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FiNest Main App',
@@ -21,7 +24,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SplashPage(title: Constants.SPLASH_PAGE_TITLE)
+      // home: LoginViaOTPPage()
+      home: AppSplashPage()
     );
   }
 }

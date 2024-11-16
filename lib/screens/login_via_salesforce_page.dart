@@ -1,21 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:finmind/constants.dart';
-import 'package:finmind/exception.dart';
+import 'package:finmind/util/constants.dart';
+import 'package:finmind/util/exception.dart';
 import 'package:finmind/util/secure_file_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class SalesforceLoginPage extends StatefulWidget {
+class LoginViaSalesforcePage extends StatefulWidget {
   final String authUrl;
   final String clientId;
   final String redirectUri;
   final String tokenUrl;
   final BuildContext currentContext;
 
-  const SalesforceLoginPage({super.key, 
+  const LoginViaSalesforcePage({super.key, 
     required this.authUrl,
     required this.clientId,
     required this.redirectUri,
@@ -27,7 +27,7 @@ class SalesforceLoginPage extends StatefulWidget {
   FinPlanSalesforceLoginPageState createState() => FinPlanSalesforceLoginPageState();
 }
 
-class FinPlanSalesforceLoginPageState extends State<SalesforceLoginPage> {
+class FinPlanSalesforceLoginPageState extends State<LoginViaSalesforcePage> {
   
   late WebViewController webViewController;
 
@@ -82,7 +82,7 @@ class FinPlanSalesforceLoginPageState extends State<SalesforceLoginPage> {
                     );
                   } 
                   else {
-                    throw CustomException('Failed to get Access Token: ${tokenResponse.body}');
+                    throw AppException('Failed to get Access Token: ${tokenResponse.body}');
                   }
 
                   // Pop the webview and return the parsed response

@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:finmind/exception.dart';
-import 'package:finmind/screens/salesforce_login_page.dart';
+import 'package:finmind/sf/salesforce_custom_rest_controller.dart';
+import 'package:finmind/util/constants.dart';
+import 'package:finmind/util/exception.dart';
+import 'package:finmind/screens/login_via_salesforce_page.dart';
 import 'package:finmind/util/secure_file_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -9,7 +11,7 @@ import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class SalesforceAuthService {
+class SalesforceAuth2Controller {
 
   static String clientId = dotenv.env['clientId'] ?? '';
   static String redirectUri = dotenv.env['redirectUri'] ?? '';
@@ -23,7 +25,7 @@ class SalesforceAuthService {
     return Navigator.push( // Experimantal, can we use pushReplacement?
       context,
       MaterialPageRoute(
-        builder: (context) => SalesforceLoginPage(
+        builder: (context) => LoginViaSalesforcePage(
           authUrl: authUrl,
           clientId: clientId,
           redirectUri: redirectUri,
@@ -84,13 +86,21 @@ class SalesforceAuthService {
       } 
       else {
         Logger().e('Error : StatusCode 302 : RedirectionUrl is empty!');
-        throw CustomException('Error : StatusCode 302 : RedirectionUrl is empty');
+        throw AppException('Error : StatusCode 302 : RedirectionUrl is empty');
       }
     }
     else {
       // Failed to logout for some strange thing :-]
-      throw CustomException('Failed to logout: ${response.body}, response status code is ${response.statusCode}');
+      throw AppException('Failed to logout: ${response.body}, response status code is ${response.statusCode}');
     }
+  }
+
+  Future<String> loginViaOTP() async{
+    final result = SalesforceCustomRestController.callSalesforceAPI(
+      endpointUrl: Constants.LOGIN_VIA_OTP_ENDPOINT, 
+      httpMethod: Constants.POST);
+    Logger().d('Response inside => $result');
+    return result;
   }
 
 }

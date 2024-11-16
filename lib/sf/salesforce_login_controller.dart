@@ -4,7 +4,7 @@
 import 'dart:convert';
 import 'dart:core';
 import 'package:finmind/util/constants.dart';
-import 'package:finmind/exception.dart';
+import 'package:finmind/util/exception.dart';
 import 'package:finmind/util/secure_file_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
@@ -95,7 +95,7 @@ class SalesforceLoginController{
         // Log an error
         String errorMessage = 'Error occurred to retrieve access token with refresh token!';
         loginResponse['error'] = errorMessage;
-        throw CustomException(errorMessage);
+        throw AppException(errorMessage);
       }
     }
     catch(error, stacktrace){

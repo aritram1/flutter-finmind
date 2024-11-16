@@ -81,14 +81,14 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
-  uses-material-design: true
+  uses-material-design: true 
 
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/appIcon.png
-    - assets/loginPage/salesforceIcon.jpeg
-    - assets/loginPage/googleIcon.jpeg
-    - assets/loginPage/dialerIcon.jpeg
+    - assets/appLoginPage/salesforceIcon.png
+    - assets/appLoginPage/googleIcon.png
+    - assets/appLoginPage/dialerIcon.png
     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see

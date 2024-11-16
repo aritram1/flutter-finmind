@@ -4,7 +4,7 @@
 import 'dart:convert';
 import 'dart:core';
 import 'dart:math';
-import 'package:finmind/constants.dart';
+import 'package:finmind/util/constants.dart';
 import 'package:finmind/sf/salesforce_util.dart';
 import 'package:finmind/util/secure_file_manager.dart';
 import 'package:http/http.dart' as http;
