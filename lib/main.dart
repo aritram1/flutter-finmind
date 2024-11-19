@@ -1,8 +1,5 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
-import 'package:finmind/screens/login_via_otp_page.dart';
-import 'package:finmind/util/constants.dart';
-import 'package:finmind/screens/app_splash_page.dart';
+import 'package:finmind/modules/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
