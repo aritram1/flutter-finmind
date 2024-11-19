@@ -37,7 +37,7 @@ class _MySplashPageState extends State<AppSplashPage> {
         else if(snapshot.data != null /* && snapshot.data!.isNotEmpty*/){
           final String? token = snapshot.data;
           Logger().d('token is retrieved as $token');
-          return const FinPlanAppHomePage(title : AppConstants.HOME_PAGE_TITLE);
+          return const AppHomePage(title : AppConstants.HOME_PAGE_TITLE);
         }
         else {
           final String? result = snapshot.data;

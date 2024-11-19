@@ -1,10 +1,32 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 import 'package:finmind/modules/splash/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
+
+  // initialize dot env
+  loadDotEnvFile();
+
+  // If not granted, request for permissions (sms read etc) on app startup
+  handlePermissions();
+
   runApp(const MyApp());
+}
+
+// initialize dot env
+loadDotEnvFile() async{
+  await dotenv.load(fileName: ".env"); 
+}
+
+// If not granted, request for permissions (sms read etc) on app startup
+handlePermissions() async{
+  PermissionStatus status = await Permission.sms.status;
+  if (status != PermissionStatus.granted) {
+    await Permission.sms.request();
+  }
 }
 
 class MyApp extends StatelessWidget {

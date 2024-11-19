@@ -1,6 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:finmind/helper/app_constants.dart';
+import 'package:finmind/helper/app_exception.dart';
+import 'package:finmind/helper/salesforce_oauth2_controller.dart';
+import 'package:finmind/modules/home/home.dart';
 import 'package:finmind/widgets/wavy_clipper/wavy_clipper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
 import 'package:finmind/modules/login/login_via_otp.dart';
 import 'package:finmind/modules/login/login_via_salesforce.dart';
@@ -109,17 +115,24 @@ class LoginPageState extends State<AppLoginPage> {
                         FinPlanLoginProviderCard(
                           name: widget.buttonNameSalesforce,
                           image: 'assets/appLoginPage/salesforceIcon.png',
-                          onTap: loginWithSalesforce,
+                          onTap: () async {
+                            BuildContext bc = context;
+                            loginWithSalesforce(bc);
+                          },
                         ),
                         FinPlanLoginProviderCard(
                           name: widget.buttonNameGoogle,
                           image: 'assets/appLoginPage/googleIcon.png',
-                          onTap: loginWithGoogle,
+                          onTap: () async {
+                            loginWithGoogle();
+                          },
                         ),
                         FinPlanLoginProviderCard(
                           name: widget.buttonNameOTP,
                           image: 'assets/appLoginPage/dialerIcon.png',
-                          onTap: loginWithOTP,
+                          onTap: () async {
+                            loginWithOTP();
+                          },
                         ),
                       ],
                     ),
@@ -133,20 +146,66 @@ class LoginPageState extends State<AppLoginPage> {
     );
   }
 
-  void loginWithSalesforce() {
-    Logger().d('Trying to login via Salesforce!');
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => LoginViaOTPPage()), // Replace with your actual page
-    );
+  void loginWithSalesforce (BuildContext currentContext) async {
+
+    String? token;
+
+    try{
+      token = await SalesforceAuth2Controller.authenticate(context);
+      if(token == null) throw AppException('Token is null in FinPlanLoginPage build');
+    }
+    catch(error, stacktrace){
+      Logger().d('Error occurred in Login Page build : $error, stacktrace : $stacktrace}');
+    }
+    
+    setState(() {
+      isLoading = false;
+    });
+          
+    Logger().d('Token is $token');
+
+    if (token != null) {
+      Navigator.pushReplacement(
+        currentContext,
+        MaterialPageRoute(
+          builder: (currentContext) => const AppHomePage(title: 'Expenso'),
+        ),
+      );
+    } else {
+      // Send to Login
+      Logger().d('Error');
+      Navigator.pushReplacement(
+        currentContext,
+        MaterialPageRoute(
+          builder: (currentContext) => const AppLoginPage(),
+        ),
+      );
+    }
+    
+    // final String clientId = dotenv.env['clientId'] ?? '';
+    // final String redirectUri = dotenv.env['redirectUri'] ?? '';
+    // final String tokenUrl = dotenv.env['tokenEndpoint'] ?? '';
+    // final String authUrl = dotenv.env['authUrlEndpoint'] ?? '';
+
+    // Logger().d('Trying to login via Salesforce!');
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => LoginViaSalesforcePage(
+    //     authUrl: authUrl, 
+    //     clientId: clientId, 
+    //     redirectUri: redirectUri, 
+    //     tokenUrl: tokenUrl, 
+    //     currentContext: context,
+    //   )),
+    // );
   }
 
-  void loginWithGoogle() {
+  void loginWithGoogle() async {
     Logger().d('Trying to login via Google!');
     // Implement Google login or navigation logic here
   }
 
-  void loginWithOTP() {
+  void loginWithOTP() async {
     Logger().d('Trying to login via OTP!');
     Navigator.push(
       context,

@@ -15,17 +15,17 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
-class FinPlanAppHomePage extends StatefulWidget {
+class AppHomePage extends StatefulWidget {
 
-  const FinPlanAppHomePage({super.key, required this.title});
+  const AppHomePage({super.key, required this.title});
   
   final String title;
 
   @override
-  State<FinPlanAppHomePage> createState() => _FinPlanAppHomePageState();
+  State<AppHomePage> createState() => _AppHomePageState();
 }
 
-class _FinPlanAppHomePageState extends State<FinPlanAppHomePage> {
+class _AppHomePageState extends State<AppHomePage> {
   
   String tokenFileName = dotenv.env['tokenFileName'] ?? '';
   
