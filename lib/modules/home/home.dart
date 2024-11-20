@@ -8,8 +8,8 @@ import 'package:finmind/modules/calendar/calendar.dart';
 import 'package:finmind/modules/login/login.dart';
 import 'package:finmind/modules/message/all_messages.dart';
 import 'package:finmind/modules/transaction/all_transactions.dart';
-import 'package:finmind/widgets/app_bar/app_bar.dart';
-import 'package:finmind/widgets/finplan__tile.dart';
+import 'package:finmind/widgets/appbar_widget.dart';
+import 'package:finmind/widgets/tile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
@@ -78,7 +78,7 @@ class _AppHomePageState extends State<AppHomePage> {
       Scaffold(
           appBar: PreferredSize(
             preferredSize: AppBar().preferredSize,
-            child: FinPlanAppBar(
+            child: AppBarWidget(
               title: widget.title,
               leadingIcon: Icons.savings,
               leadingIconAction: ({String input = ''}){ 
@@ -133,7 +133,7 @@ class _AppHomePageState extends State<AppHomePage> {
                           height: row1Height,
                           // width: row1Width,
                           padding: EdgeInsets.all(padding),
-                          child: FinPlanTile(
+                          child: TileWidget(
                             center: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
@@ -163,7 +163,7 @@ class _AppHomePageState extends State<AppHomePage> {
                           padding: EdgeInsets.all(padding),
                           height: row1Height,
                           // width: row1Width,
-                          child: FinPlanTile(
+                          child: TileWidget(
                             center: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
@@ -188,7 +188,7 @@ class _AppHomePageState extends State<AppHomePage> {
                           height: row1Height,
                           // width: row1Width,
                           padding: EdgeInsets.all(padding),
-                          child: FinPlanTile(
+                          child: TileWidget(
                             center: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
@@ -216,7 +216,7 @@ class _AppHomePageState extends State<AppHomePage> {
                               height: row2Height,
                               width: MediaQuery.of(context).size.width,
                               padding: EdgeInsets.all(padding),
-                              child: FinPlanTile(
+                              child: TileWidget(
                                 center: 
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -253,7 +253,7 @@ class _AppHomePageState extends State<AppHomePage> {
                               height: row3Height,
                               // width: row3Width,
                               padding: EdgeInsets.all(padding),
-                              child: FinPlanTile(
+                              child: TileWidget(
                                 center: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
@@ -275,7 +275,7 @@ class _AppHomePageState extends State<AppHomePage> {
                               height: row3Height,
                               // width: row3Width,
                               padding: EdgeInsets.all(padding),
-                              child: FinPlanTile(
+                              child: TileWidget(
                                 center: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
@@ -308,13 +308,13 @@ class _AppHomePageState extends State<AppHomePage> {
                               height: row4Height,
                               // width: row4Width,
                               padding: EdgeInsets.all(padding),
-                              child: FinPlanTile(
+                              child: TileWidget(
                                 center: Icon(Icons.cabin),
                                 topRight: Container(
                                   height: 80,
                                   width: 80,
                                   padding: EdgeInsets.all(padding),
-                                  child: FinPlanTile(
+                                  child: TileWidget(
                                     borderColor: Colors.purple.shade100,
                                     gradientColors: [Colors.purple.shade100, Colors.purple.shade200],
                                     center: Icon(Icons.near_me),
@@ -350,7 +350,7 @@ class _AppHomePageState extends State<AppHomePage> {
                               height: row5Height,
                               // width: row5Width,
                               padding: EdgeInsets.all(padding),
-                              child: FinPlanTile(
+                              child: TileWidget(
                                 center: Icon(Icons.spa),
                                 onCallBack: (){
                                   var currentContext = context;
@@ -365,7 +365,7 @@ class _AppHomePageState extends State<AppHomePage> {
                               height: row5Height,
                               // width: row5Width,
                               padding: EdgeInsets.all(padding),
-                              child: FinPlanTile(
+                              child: TileWidget(
                                 center: Icon(Icons.spa),
                                 onCallBack: (){
                                   var currentContext = context;

@@ -3,7 +3,7 @@
 import 'package:finmind/helper/app_constants.dart';
 import 'package:finmind/helper/model_task.dart';
 import 'package:finmind/helper/salesforce_dml_controller.dart';
-import 'package:finmind/widgets/finplan__button_stateful.dart';
+import 'package:finmind/widgets/stateful_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
@@ -142,7 +142,7 @@ class _FinPlanCreateNewTaskPageState extends State<FinPlanCreateNewTaskPage> {
                       children: List.generate(daysOfWeekWithSingleLetter.length, (index) => 
                         Container(
                           margin: const EdgeInsets.only(right: 8.0),
-                          child: FinPlanStatefulButton(
+                          child: StatefulButtonWidget(
                             text: daysOfWeekWithSingleLetter[index], 
                             isSelected: true,
                             value: daysOfWeekWithSingleLetter[index], 

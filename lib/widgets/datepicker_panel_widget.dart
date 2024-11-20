@@ -6,12 +6,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
-class FinPlanDatepickerPanel extends StatefulWidget {
+class DatepickerPanelWidget extends StatefulWidget {
 
   final List<String> dateRanges;
   final void Function (DateTime sDate, DateTime eDate) onDateRangeSelected;
 
-  FinPlanDatepickerPanel({
+  DatepickerPanelWidget({
     Key? key,
     this.dateRanges = AppConstants.FAVORITE_DATE_RANGES,
     required this.onDateRangeSelected,
@@ -27,11 +27,11 @@ class FinPlanDatepickerPanel extends StatefulWidget {
   }
   
   @override
-  FinPlanDatepickerPanelState createState() => FinPlanDatepickerPanelState();
+  DatepickerPanelWidgetState createState() => DatepickerPanelWidgetState();
   
 }
 
-class FinPlanDatepickerPanelState extends State<FinPlanDatepickerPanel> {
+class DatepickerPanelWidgetState extends State<DatepickerPanelWidget> {
 
   // Class variables
   late DateTime startDate; // = DateTime.now();

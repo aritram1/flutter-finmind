@@ -1,7 +1,7 @@
 // Custom Wavy Clipper
 import 'package:flutter/material.dart';
 
-class WavyClipper extends CustomClipper<Path> {
+class WavyClipperWidget extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Path path = Path();

@@ -1,10 +1,10 @@
 // ignore_for_file: must_be_immutable
 // import 'package:ExpenseManager/widgets/finplan_table_widget.dart';
 import 'package:finmind/modules/account/util_account.dart';
-import 'package:finmind/widgets/finplan__account_cc_cardview.dart';
-import 'package:finmind/widgets/finplan__account_sa_cardview.dart';
-import 'package:finmind/widgets/finplan__account_wallet_cardview.dart';
-import 'package:finmind/widgets/finplan_table/finplan__table.dart';
+import 'package:finmind/widgets/credit_card_widget.dart';
+import 'package:finmind/widgets/savings_account_widget.dart';
+import 'package:finmind/widgets/digital_wallet_widget.dart';
+import 'package:finmind/widgets/table_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
@@ -90,19 +90,19 @@ class _AllAccountsState extends State<AllAccounts> {
         if (each['FinPlan__Account_Code__c'].contains('-SA')) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 4.0, left: 8.0, right: 8.0),
-            child: FinPlanSavingsAccountCard(data: each, onCardSelected: () {}),
+            child: SavingsAccountWidget(data: each, onCardSelected: () {}),
           );
         } 
         else if (each['FinPlan__Account_Code__c'].contains('-CC')) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 4.0, left: 8.0, right: 8.0),
-            child: FinPlanCreditAccountCard(data: each, onCardSelected: () {}),
+            child: CreditCardWidget(data: each, onCardSelected: () {}),
           );
         } 
         else if (each['FinPlan__Account_Code__c'].contains('-WA')) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 4.0, left: 8.0, right: 8.0),
-            child: FinPlanWalletCard(data: each, onCardSelected: () {}),
+            child: DigitalWalletWidget(data: each, onCardSelected: () {}),
           );
         } 
         else {

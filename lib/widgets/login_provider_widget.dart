@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class FinPlanLoginProviderCard extends StatelessWidget {
+class LoginProviderWidget extends StatelessWidget {
   
   final String name, image;
   final void Function()? onTap;
   
-  const FinPlanLoginProviderCard({
+  const LoginProviderWidget({
     super.key, 
     required this.name, 
     required this.image, 

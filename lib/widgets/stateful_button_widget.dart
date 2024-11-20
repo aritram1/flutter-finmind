@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class FinPlanStatefulButton extends StatelessWidget {
+class StatefulButtonWidget extends StatelessWidget {
   final String text;
   final String value;
   final bool isSelected; // New property to indicate whether the button is selected
   final ValueChanged<String> onSelectionChanged;
 
-  const FinPlanStatefulButton({
+  const StatefulButtonWidget({
     Key? key,
     required this.text,
     required this.value,

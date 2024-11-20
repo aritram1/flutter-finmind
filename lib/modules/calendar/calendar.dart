@@ -2,7 +2,7 @@
 import 'package:finmind/helper/model_task.dart';
 import 'package:finmind/modules/calendar/new_task.dart';
 import 'package:finmind/modules/calendar/util_calendar.dart';
-import 'package:finmind/widgets/finplan__listview.dart';
+import 'package:finmind/widgets/listview_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -141,9 +141,11 @@ class _FinPlanCalendarState extends State<FinPlanCalendar> {
               for(FinPlanTask task in finplanTasks){
                 allRecords.add(task.toMap());
               }
-              return FinPlanListView(
+              return ListViewWidget(
                 records: allRecords,
-                onRecordSelected: (input){handleRecordSelection(input);}
+                onRecordSelected: (input){
+                  handleRecordSelection(input);
+                }
               );
             } 
             else {

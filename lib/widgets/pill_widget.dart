@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-class FinPlanPill extends StatelessWidget {
-  const FinPlanPill({
+class PillWidget extends StatelessWidget {
+  const PillWidget({
     super.key,
     required this.types,
     required this.onPillSelected,

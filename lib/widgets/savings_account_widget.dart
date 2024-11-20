@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class FinPlanSavingsAccountCard extends StatelessWidget {
-  const FinPlanSavingsAccountCard({
+class SavingsAccountWidget extends StatelessWidget {
+  const SavingsAccountWidget({
     super.key,
     required this.data,
     required this.onCardSelected,

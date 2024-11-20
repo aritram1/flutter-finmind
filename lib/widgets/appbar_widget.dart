@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-class FinPlanAppBar extends StatelessWidget {
+class AppBarWidget extends StatelessWidget {
 
-  const FinPlanAppBar({
+  const AppBarWidget({
     Key? key,
     required this.title,
     required this.leadingIconAction,

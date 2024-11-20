@@ -4,8 +4,8 @@ import 'package:finmind/helper/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
-class FinPlanEnhancedPill extends StatelessWidget {
-  FinPlanEnhancedPill({
+class EnhancedPillWidget extends StatelessWidget {
+  EnhancedPillWidget({
     super.key,
     required this.data,    
     required this.onPillSelected,

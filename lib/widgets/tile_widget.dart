@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
-class FinPlanTile extends StatefulWidget {
+class TileWidget extends StatefulWidget {
   
-  const FinPlanTile({
+  const TileWidget({
     super.key,
     this.padding = 8.0,
     this.borderRadius = 20,
@@ -40,10 +40,10 @@ class FinPlanTile extends StatefulWidget {
   final Widget? bottomRight;
   final Function onCallBack;
   @override
-  State<FinPlanTile> createState() => _FinPlanTileState();
+  State<TileWidget> createState() => _TileWidgetState();
 }
 
-class _FinPlanTileState extends State<FinPlanTile> {
+class _TileWidgetState extends State<TileWidget> {
 
   static final Logger log = Logger();
   
@@ -61,7 +61,7 @@ class _FinPlanTileState extends State<FinPlanTile> {
       padding: EdgeInsets.all(0.0),
       child: GestureDetector(
         onTap: (){
-          log.d('Callback is invoked for the FinPlanTile widget!');
+          log.d('Callback is invoked for the TileWidget widget!');
           widget.onCallBack();
         },
         child: Container(

@@ -2,9 +2,9 @@
 import 'package:finmind/helper/app_constants.dart';
 import 'package:finmind/helper/app_exception.dart';
 import 'package:finmind/modules/transaction/util_transaction.dart';
-import 'package:finmind/widgets/finplan__datepicker_panel.dart';
-import 'package:finmind/widgets/finplan__pill_enhanced.dart';
-import 'package:finmind/widgets/finplan_table/finplan__table.dart';
+import 'package:finmind/widgets/datepicker_panel_widget.dart';
+import 'package:finmind/widgets/enhanced_pill_widget.dart';
+import 'package:finmind/widgets/table_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
@@ -112,7 +112,7 @@ class FinPlanAllTransactionsState extends State<FinPlanAllTransactions> {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Column(
               children: [
-                FinPlanDatepickerPanel(
+                DatepickerPanelWidget(
                   onDateRangeSelected: handleDateRangeSelection,
                 ),
               ]
@@ -128,7 +128,7 @@ class FinPlanAllTransactionsState extends State<FinPlanAllTransactions> {
                 padding: const EdgeInsets.all(8.0),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: FinPlanEnhancedPill(
+                  child: EnhancedPillWidget(
                     data: allData,
                     onPillSelected: onPillSelected,
                   ),

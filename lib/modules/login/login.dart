@@ -4,13 +4,13 @@ import 'package:finmind/helper/app_constants.dart';
 import 'package:finmind/helper/app_exception.dart';
 import 'package:finmind/helper/salesforce_oauth2_controller.dart';
 import 'package:finmind/modules/home/home.dart';
-import 'package:finmind/widgets/wavy_clipper/wavy_clipper.dart';
+import 'package:finmind/widgets/wavy_clipper_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
 import 'package:finmind/modules/login/login_via_otp.dart';
 import 'package:finmind/modules/login/login_via_salesforce.dart';
-import 'package:finmind/widgets/login_provider_card/login_provider_card.dart';
+import 'package:finmind/widgets/login_provider_widget.dart';
 
 class AppLoginPage extends StatefulWidget {
   const AppLoginPage({
@@ -46,7 +46,7 @@ class LoginPageState extends State<AppLoginPage> {
           ),
           // Wavy Purple Section
           ClipPath(
-            clipper: WavyClipper(),
+            clipper: WavyClipperWidget(),
             child: Container(
               height: 300,
               color: Colors.purple,
@@ -112,7 +112,7 @@ class LoginPageState extends State<AppLoginPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        FinPlanLoginProviderCard(
+                        LoginProviderWidget(
                           name: widget.buttonNameSalesforce,
                           image: 'assets/appLoginPage/salesforceIcon.png',
                           onTap: () async {
@@ -120,14 +120,14 @@ class LoginPageState extends State<AppLoginPage> {
                             loginWithSalesforce(bc);
                           },
                         ),
-                        FinPlanLoginProviderCard(
+                        LoginProviderWidget(
                           name: widget.buttonNameGoogle,
                           image: 'assets/appLoginPage/googleIcon.png',
                           onTap: () async {
                             loginWithGoogle();
                           },
                         ),
-                        FinPlanLoginProviderCard(
+                        LoginProviderWidget(
                           name: widget.buttonNameOTP,
                           image: 'assets/appLoginPage/dialerIcon.png',
                           onTap: () async {

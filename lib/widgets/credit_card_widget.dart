@@ -4,8 +4,8 @@ import 'package:finmind/helper/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class FinPlanCreditAccountCard extends StatelessWidget {
-  const FinPlanCreditAccountCard({
+class CreditCardWidget extends StatelessWidget {
+  const CreditCardWidget({
     super.key,
     required this.data,
     required this.onCardSelected,

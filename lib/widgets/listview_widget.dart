@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-class FinPlanListView extends StatefulWidget {
-  const FinPlanListView({
+class ListViewWidget extends StatefulWidget {
+  const ListViewWidget({
     Key? key,
     required this.records,
     required this.onRecordSelected,
@@ -13,10 +13,10 @@ class FinPlanListView extends StatefulWidget {
   final Function(dynamic) onRecordSelected;
 
   @override
-  _FinPlanListViewState createState() => _FinPlanListViewState();
+  _ListViewWidgetState createState() => _ListViewWidgetState();
 }
 
-class _FinPlanListViewState extends State<FinPlanListView> {
+class _ListViewWidgetState extends State<ListViewWidget> {
 
   Set<String> selectedIds = {};
 
