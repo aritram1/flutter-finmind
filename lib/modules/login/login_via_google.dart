@@ -74,12 +74,13 @@ class LoginViaGooglePageState extends State<LoginViaGooglePage> {
                   Map<String, dynamic> parsedResponse = jsonDecode(tokenResponse.body);
                   
                   if (parsedResponse['access_token'] != null || parsedResponse['instance_url'] != null) {
-                    await SecureFileManager.setAccessToken(parsedResponse['access_token']);
-                    await SecureFileManager.setRefreshToken(parsedResponse['refresh_token']);
-                    await SecureFileManager.setInstanceURL(parsedResponse['instance_url']);
-                    await SecureFileManager.setExpiryTimeOfToken(
-                      DateTime.now().add(const Duration(minutes: AppConstants.TOKEN_TIMEOUT_MINUTES)).toString()
-                    );
+                    await SecureFileManager.saveReponseToSecureStorage(parsedResponse);
+                    // await SecureFileManager.setAccessToken(parsedResponse['access_token']);
+                    // await SecureFileManager.setRefreshToken(parsedResponse['refresh_token']);
+                    // await SecureFileManager.setInstanceURL(parsedResponse['instance_url']);
+                    // await SecureFileManager.setExpiryTimeOfToken(
+                    //   DateTime.now().add(const Duration(minutes: AppConstants.TOKEN_TIMEOUT_MINUTES)).toString()
+                    // );
                   } 
                   else {
                     throw AppException('Failed to get Access Token: ${tokenResponse.body}');

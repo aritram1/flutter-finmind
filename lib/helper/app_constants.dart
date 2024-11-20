@@ -40,6 +40,9 @@ class AppConstants{
 
   static const int STATUS_CODE_OK = 200;
   static const int STATUS_CODE_NOT_OK = 400;
+  
+  static const String QUERY_URL = '/services/data/v59.0/query?q=';
+
 
   static const Map<String, List<dynamic>> ICON_LABEL_DATA = {
     'Aquarium' : ['Aquarium', Icons.water],

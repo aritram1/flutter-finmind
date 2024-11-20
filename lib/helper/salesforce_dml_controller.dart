@@ -5,7 +5,9 @@ import 'dart:convert';
 import 'dart:core';
 import 'dart:math';
 import 'package:finmind/helper/app_constants.dart';
+import 'package:finmind/helper/app_secure_file_manager.dart';
 import 'package:finmind/helper/salesforce_util.dart';
+import 'package:finmind/modules/account/util_account.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -54,6 +56,9 @@ class SalesforceDMLController{
     debug                 = bool.parse(dotenv.env['debug'] ?? 'false');
     detaildebug           = bool.parse(dotenv.env['detaildebug'] ?? 'false');
 
+    accessToken = await SecureFileManager.getAccessToken() ?? 'ERROR occurred to get Access Token';
+    instanceUrl = await SecureFileManager.getInstanceURL() ?? 'ERROR occurred to get Instance URL';
+    
     initialized = true;
 
   }
@@ -65,8 +70,7 @@ class SalesforceDMLController{
     List<Map<String, dynamic>> fieldNameValuePairs = const [], 
     List<String> recordIds = const [], 
     bool hardDelete = false, 
-    int batchSize = 200}
-  ) async{
+    int batchSize = 200}) async{
     
     if(!initialized) await init();
     
@@ -195,8 +199,8 @@ class SalesforceDMLController{
     dynamic resp;
     try{
       resp = await http.post(
-        Uri.parse(SalesforceUtil.generateEndpointUrl(opType : AppConstants.INSERT, objAPIName : objAPIName)), // both are required params
-        headers: generateLoggedInRequestHeader(),
+        Uri.parse(SalesforceUtil.generateEndpointUrl(opType : AppConstants.INSERT, instanceUrl: instanceUrl, objAPIName : objAPIName)), // both are required params
+        headers: SalesforceUtil.generateLoggedInRequestHeader(accessToken),
         body: jsonEncode(SalesforceUtil.generateBody(opType : AppConstants.INSERT, objAPIName : objAPIName, fieldNameValuePairs : fieldNameValuePairs, batchCount : batchCount)),
       );
       int statusCode = resp.statusCode;
@@ -234,8 +238,8 @@ class SalesforceDMLController{
     
     try{
       dynamic resp = await http.patch(
-        Uri.parse(SalesforceUtil.generateEndpointUrl(opType : AppConstants.UPDATE, objAPIName : objAPIName)), // required param is opType
-        headers: generateLoggedInRequestHeader(),
+        Uri.parse(SalesforceUtil.generateEndpointUrl(opType : AppConstants.UPDATE, instanceUrl: instanceUrl, objAPIName : objAPIName)), // required param is opType
+        headers: SalesforceUtil.generateLoggedInRequestHeader(accessToken),
         body: jsonEncode(SalesforceUtil.generateBody(opType : AppConstants.UPDATE, objAPIName : objAPIName, fieldNameValuePairs : fieldNameValuePairs, batchCount : batchCount)),
       );
       final List<dynamic> body = json.decode(resp.body);
@@ -258,11 +262,12 @@ class SalesforceDMLController{
         Uri.parse(
           SalesforceUtil.generateEndpointUrl(
             opType : AppConstants.INSERT, 
+            instanceUrl: instanceUrl,
             objAPIName : objAPIName, 
             recordIds : recordIds, 
             batchCount : batchCount, 
             hardDelete : hardDelete)),
-        headers: generateLoggedInRequestHeader(),
+        headers: SalesforceUtil.generateLoggedInRequestHeader(accessToken),
         // body : <not_applicable> since body is not required for delete call
       );
       final List<dynamic> body = json.decode(resp.body);
@@ -275,15 +280,6 @@ class SalesforceDMLController{
     }
     // if(detaildebug) log.d('Response from _deleteResponse $deleteResponse');
     return deleteResponse;  
-  }
-
-  // Method to generate request header for logged in requests
-  static Map<String, String> generateLoggedInRequestHeader(){
-    Map<String, String> header = {
-      'Content-Type' : 'application/json',
-      'Authorization' : 'Bearer $accessToken'
-    };
-    return header;
   }
 
   // Part 1 : Part 1 of the specific method to process the DML response (especially for multi part results)

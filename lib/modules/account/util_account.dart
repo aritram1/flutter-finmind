@@ -28,13 +28,13 @@ class AccountUtil {
     if(debug) log.d('Datainside generatedDataForExpenseScreen2v2: ${data.toString()}');
     
     if(error != null && error.isNotEmpty){
-      if(debug) log.d('Error occurred while querying inside generatedDataForExpenseScreen2v2 : ${response['error']}');
+      if(debug) log.d('Error occurred while querying inside getAllAccountsData : ${response['error']}');
       //return null;
     }
     else if (data != null && data.isNotEmpty) {
       try{
         dynamic records = data['data'];
-        if(detaildebug) log.d('Inside generatedDataForExpenseScreen2v2 Records=> $records');
+        if(detaildebug) log.d('Inside getAllAccountsData Records=> $records');
         if(records != null && records.isNotEmpty){
           for (var record in records) {
             Map<String, dynamic> recordMap = Map.castFrom(record);
@@ -43,10 +43,10 @@ class AccountUtil {
         }
       }
       catch(error){
-        if(debug) log.e('Error Inside generatedDataForExpenseScreen2v2 : $error');
+        if(debug) log.e('Error Inside getAllAccountsData : $error');
       }
     }
-    if(debug) log.d('Inside generatedDataForExpenseScreen2v2=>$allAccounts');
+    if(debug) log.d('Inside getAllAccountsData=>$allAccounts');
     return allAccounts;
   }
 

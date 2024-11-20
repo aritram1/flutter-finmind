@@ -131,24 +131,18 @@ class SalesforceLoginController{
         
         // Parse the JSON response
         Map<String, dynamic> responseData = jsonDecode(response.body);
-        logger.d('1');
-        
+        accessToken = responseData['access_token'];
+        instanceUrl = responseData['instance_url'];
+        refreshToken = responseData['refresh_token'];
+        String expiryTimeOfToken = DateTime.now().add(const Duration(minutes: AppConstants.TOKEN_TIMEOUT_MINUTES)).toString();
+
         // Store the response and other info like token values
         await SecureFileManager.setLoginResponse(response.body);
-        await SecureFileManager.setAccessToken(responseData['access_token']);
-        logger.d('2');
-        accessToken = responseData['access_token'];
-        logger.d('2.1');
-        logger.d('responseData[instance_url]=>${responseData['instance_url']}');
-        await SecureFileManager.setInstanceURL(responseData['instance_url']);
-        logger.d('2.3');
-        instanceUrl = responseData['instance_url'];
-        logger.d('3');
+        await SecureFileManager.setAccessToken(accessToken);
+        await SecureFileManager.setInstanceURL(instanceUrl);
         await SecureFileManager.clearRefreshToken();
-        logger.d('3.1');
-        await SecureFileManager.setRefreshToken(responseData['refresh_token']);
-        logger.d('4');
-        await SecureFileManager.setExpiryTimeOfToken(DateTime.now().add(const Duration(minutes: AppConstants.TOKEN_TIMEOUT_MINUTES)).toString());  
+        await SecureFileManager.setRefreshToken(refreshToken);
+        await SecureFileManager.setExpiryTimeOfToken(expiryTimeOfToken);  
         return responseData['access_token'];
       } 
       else {

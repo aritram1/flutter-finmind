@@ -5,7 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
-class FinPlanTableWidget extends StatefulWidget {
+class TableWidget extends StatefulWidget {
 
   // header will have name and type of the field to display 
   // [
@@ -43,7 +43,7 @@ class FinPlanTableWidget extends StatefulWidget {
   final bool showSelectionBoxes; // records are selected with this checkbox
   final bool showNavigation; // this helps to navigate to row specific pages
   
-  const FinPlanTableWidget({
+  const TableWidget({
     Key? key,
     required this.header, 
     required this.data,
@@ -58,10 +58,10 @@ class FinPlanTableWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  FinPlanTableWidgetState createState() => FinPlanTableWidgetState();
+  TableWidgetState createState() => TableWidgetState();
 }
 
-class FinPlanTableWidgetState extends State<FinPlanTableWidget> {
+class TableWidgetState extends State<TableWidget> {
 
   List<String> numericColumns = [];//['Amount', 'Balance'];
   List<String> dateColumns = []; // ['Date'];

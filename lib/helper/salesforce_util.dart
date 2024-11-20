@@ -3,6 +3,7 @@
 
 import 'dart:core';
 import 'package:finmind/helper/app_constants.dart';
+import 'package:finmind/helper/app_secure_file_manager.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -20,7 +21,7 @@ class SalesforceUtil{
   static String compositeUrlForInsert = '';
   static String compositeUrlForUpdate = '';
   static String compositeUrlForDelete = '';
-  static String queryUrl = '';
+  static String queryUrl = AppConstants.QUERY_URL;
   static bool debug = false; 
   static bool detaildebug = false;
 
@@ -33,30 +34,30 @@ class SalesforceUtil{
 
   static bool initialized = false;
 
-  static init() async {
-    // Load environment variables from the .env file and assign to class variables
-    await dotenv.load(fileName: ".env");
-    clientId              = dotenv.env['clientId'] ?? '';
-    clientSecret          = dotenv.env['clientSecret'] ?? '';
-    userName              = dotenv.env['userName'] ?? '';
-    pwdWithToken          = dotenv.env['pwdWithToken'] ?? '';
-    tokenEndpoint         = dotenv.env['tokenEndpoint'] ?? '';
-    tokenGrantType        = dotenv.env['tokenGrantType'] ?? '';
+  // static init() async {
+  //   // Load environment variables from the .env file and assign to class variables
+  //   await dotenv.load(fileName: ".env");
+  //   clientId              = dotenv.env['clientId'] ?? '';
+  //   clientSecret          = dotenv.env['clientSecret'] ?? '';
+  //   userName              = dotenv.env['userName'] ?? '';
+  //   pwdWithToken          = dotenv.env['pwdWithToken'] ?? '';
+  //   tokenEndpoint         = dotenv.env['tokenEndpoint'] ?? '';
+  //   tokenGrantType        = dotenv.env['tokenGrantType'] ?? '';
 
-    compositeUrlForInsert = dotenv.env['compositeUrlForInsert'] ?? ''; // Standard Insert API from Salesforce - '/services/data/v59.0/composite/tree/'
-    compositeUrlForUpdate = dotenv.env['compositeUrlForUpdate'] ?? ''; // Standard Update API from Salesforce - '/services/data/v59.0/composite/sobjects/'
-    compositeUrlForDelete = dotenv.env['compositeUrlForDelete'] ?? ''; // Standard Delete API from Salesforce - '/services/data/v59.0/composite/sobjects?ids='
-    queryUrl              = dotenv.env['queryUrl'] ?? '';              // Standard Query API from Salesforce  - '/services/data/v59.0/query?q='
+  //   compositeUrlForInsert = dotenv.env['compositeUrlForInsert'] ?? ''; // Standard Insert API from Salesforce - '/services/data/v59.0/composite/tree/'
+  //   compositeUrlForUpdate = dotenv.env['compositeUrlForUpdate'] ?? ''; // Standard Update API from Salesforce - '/services/data/v59.0/composite/sobjects/'
+  //   compositeUrlForDelete = dotenv.env['compositeUrlForDelete'] ?? ''; // Standard Delete API from Salesforce - '/services/data/v59.0/composite/sobjects?ids='
+  //   queryUrl              = dotenv.env['queryUrl'] ?? '';              // Standard Query API from Salesforce  - '/services/data/v59.0/query?q='
 
-    debug                 = bool.parse(dotenv.env['debug'] ?? 'false');
-    detaildebug           = bool.parse(dotenv.env['detaildebug'] ?? 'false');
+  //   debug                 = bool.parse(dotenv.env['debug'] ?? 'false');
+  //   detaildebug           = bool.parse(dotenv.env['detaildebug'] ?? 'false');
 
-    initialized = true;
+  //   initialized = true;
 
-  }
+  // }
 
   // Method to generate request header for logged in requests
-  static Map<String, String> generateLoggedInRequestHeader(){
+  static Map<String, String> generateLoggedInRequestHeader(String accessToken){
     Map<String, String> header = {
       'Content-Type' : 'application/json',
       'Authorization' : 'Bearer $accessToken'
@@ -65,7 +66,7 @@ class SalesforceUtil{
   }
 
   // Generic method to generate the endpoint URL for the type of operation
-  static String generateEndpointUrl({ required String opType, String objAPIName = '', 
+  static String generateEndpointUrl({ required String opType, String instanceUrl = '', String objAPIName = '', 
                                       List<String> recordIds = const [], 
                                       int batchCount = 0, bool hardDelete = false}){
     String endpointUrl = '';
@@ -90,7 +91,7 @@ class SalesforceUtil{
         endpointUrl = '$instanceUrl$compositeUrlForDelete$ids';
       }
     }
-    if(detaildebug) log.d('Generated endpoint : $endpointUrl');
+    log.d('Generated endpoint : $endpointUrl');
     return endpointUrl;
   }
 
@@ -136,19 +137,19 @@ class SalesforceUtil{
   }
 
   // Method specific to generate endpoint url for a query operation 
-  static String generateQueryEndpointUrl(String objAPIName, List<String> fieldList, String whereClauseString, String orderByClauseString, int? count){
+  static String generateQueryEndpointUrl(String instanceUrl, String objAPIName, List<String> fieldList, String whereClauseString, String orderByClauseString, int? count){
     String fields = fieldList.isNotEmpty ? fieldList.join(',') : 'count()';
     String whereClause = whereClauseString != '' ? 'WHERE $whereClauseString' : '' ;
     String orderByClause =  orderByClauseString != '' ? 'ORDER BY $orderByClauseString' : '';
     String limitCount = (count != null && count > 0) ? 'LIMIT $count' : '';
 
     String query = 'SELECT $fields FROM $objAPIName $whereClause $orderByClause $limitCount';
-    if(debug) log.d('Generated Query : $query');
+    log.d('Generated Query : $query');
 
     query = query.replaceAll(' ', '+');
         
     final String endpointUrl = '$instanceUrl$queryUrl$query';
-    if(detaildebug) log.d('endpointUrl inside generateQueryEndpointUrl: $endpointUrl');
+    log.d('endpointUrl inside generateQueryEndpointUrl: $endpointUrl');
 
     return endpointUrl;
   }

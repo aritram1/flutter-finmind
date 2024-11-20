@@ -95,7 +95,7 @@ class SalesforceQueryController{
       if(detaildebug) log.d('queryFromSalesforce url =>$instanceUrl$nextRecordsUrl');
       dynamic restRecordsResponse = await http.get(
         Uri.parse('$instanceUrl$nextRecordsUrl'),
-        headers: SalesforceUtil.generateLoggedInRequestHeader(),
+        headers: SalesforceUtil.generateLoggedInRequestHeader(accessToken),
         // body: [], //not required for query call
       );
       final Map<String, dynamic> body = json.decode(restRecordsResponse.body);
@@ -134,8 +134,8 @@ class SalesforceQueryController{
     
     try{
       dynamic resp = await http.get(
-        Uri.parse(SalesforceUtil.generateQueryEndpointUrl(objAPIName, fieldList, whereClause, orderByClause, count)),
-        headers: SalesforceUtil.generateLoggedInRequestHeader(),  
+        Uri.parse(SalesforceUtil.generateQueryEndpointUrl(instanceUrl, objAPIName, fieldList, whereClause, orderByClause, count)),
+        headers: SalesforceUtil.generateLoggedInRequestHeader(accessToken),  
         // body: [], //not required for query call
       );
       if(detaildebug) log.d('_queryFromSalesforce response.statusCode ${resp.statusCode}');

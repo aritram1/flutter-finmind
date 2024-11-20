@@ -63,7 +63,7 @@ class _AllAccountsState extends State<AllAccounts> {
   Widget tableView(tableData){
     // return const Center(child: Text('This is an interim Sample table view'),);
     return Expanded(
-                child: FinPlanTableWidget(
+                child: TableWidget(
                   header : const [
                     {'label': 'Paid To', 'type': 'String'},
                     {'label': 'Amount', 'type': 'double'},

@@ -135,7 +135,7 @@ class FinPlanAllTransactionsState extends State<FinPlanAllTransactions> {
                 ),
               ),
               Expanded(
-                child: FinPlanTableWidget(
+                child: TableWidget(
                   header: const [
                     {'label': 'Paid To', 'type': 'String'},
                     {'label': 'Amount', 'type': 'double'},

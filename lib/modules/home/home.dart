@@ -26,9 +26,7 @@ class AppHomePage extends StatefulWidget {
 }
 
 class _AppHomePageState extends State<AppHomePage> {
-  
-  String tokenFileName = dotenv.env['tokenFileName'] ?? '';
-  
+    
   static final Logger log = Logger();
 
   // static bool isLoggedIn = false;
@@ -174,7 +172,6 @@ class _AppHomePageState extends State<AppHomePage> {
                             ),
                             onCallBack: () async{
                               var currentContext = context;
-                              // final fileContent = await FileManager.getFromFile(tokenFileName) ?? 'Error : File is blank!'; 
                               final accessToken = await SecureFileManager.getAccessToken() ?? 'Error : no token found!'; 
                               navigateTo(currentContext, Scaffold(appBar: AppBar(), body: Center(child: Text(accessToken)))); 
                             }
@@ -398,8 +395,8 @@ class _AppHomePageState extends State<AppHomePage> {
     String refreshToken = await SecureFileManager.getRefreshToken() ?? 'Error! You are not logged in yet';
     String instanceUrl = await SecureFileManager.getInstanceURL() ?? 'Error! You are not logged in yet';
     String expiryTime = await SecureFileManager.getExpiryTimeOfToken() ?? 'Error! You are not logged in yet';
-    String result = 'accessToken => $accessToken || refreshToken => $refreshToken || instanceUrl => $instanceUrl || expiryTime => $expiryTime';
-    Logger().d('Inside navigate to method info are : $result');
+    String resultText = 'accessToken => $accessToken || refreshToken => $refreshToken || instanceUrl => $instanceUrl || expiryTime => $expiryTime';
+    Logger().d('Inside navigate to method resultText is : $resultText');
     Navigator.push(
       context, 
       MaterialPageRoute(
@@ -410,7 +407,7 @@ class _AppHomePageState extends State<AppHomePage> {
               padding: EdgeInsets.all(8),
               // child: // FinPlanMonthView()
               child: Center(
-                child: Text(result),
+                child: Text(resultText),
               ),
             )
           )

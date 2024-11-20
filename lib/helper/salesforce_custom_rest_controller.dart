@@ -83,26 +83,26 @@ class SalesforceCustomRestController{
     if(httpMethod == 'GET'){
       resp = await http.get(
         Uri.parse(epUrl), 
-        headers: SalesforceUtil.generateLoggedInRequestHeader()
+        headers: SalesforceUtil.generateLoggedInRequestHeader(accessToken)
       );
     }
     else if(httpMethod == 'POST'){
       resp = await http.post(
         Uri.parse(epUrl), 
-        headers: SalesforceUtil.generateLoggedInRequestHeader(), 
+        headers: SalesforceUtil.generateLoggedInRequestHeader(accessToken), 
         body: jsonEncode(body)
       );
     }
     else if(httpMethod == 'PATCH'){
       resp = await http.patch(
         Uri.parse(epUrl), 
-        headers: SalesforceUtil.generateLoggedInRequestHeader(),
+        headers: SalesforceUtil.generateLoggedInRequestHeader(accessToken),
         body: jsonEncode(body)); 
     }
     else if(httpMethod == 'DELETE'){
       resp = await http.delete(
         Uri.parse(epUrl), 
-        headers: SalesforceUtil.generateLoggedInRequestHeader(), 
+        headers: SalesforceUtil.generateLoggedInRequestHeader(accessToken), 
         body: jsonEncode(body)
       );
     }
