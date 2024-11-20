@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:finmind/widgets/finplan__tile.dart';
+import 'package:finmind/widgets/tile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
@@ -61,7 +61,7 @@ class _FinPlanMessageDetailState extends State<FinPlanMessageDetail> {
           ),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: FinPlanTile(
+        child: TileWidget(
           topLeft: Text(widget.sms),
           // center: Text(data['id']),
           onCallBack: (){},
