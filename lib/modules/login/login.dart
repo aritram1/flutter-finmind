@@ -94,45 +94,51 @@ class LoginPageState extends State<AppLoginPage> {
                     ),
                   ),
                   const SizedBox(height: 24.0),
-                  // Text: Login With
-                  Center(
-                    child: Text(
-                      'Login With',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 24.0),
                   // Login Buttons
                   Visibility(
                     visible: widget.showLoginButton,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    child: Column(
                       children: [
-                        LoginProviderWidget(
-                          name: widget.buttonNameSalesforce,
-                          image: 'assets/appLoginPage/salesforceIcon.png',
-                          onTap: () async {
-                            BuildContext bc = context;
-                            loginWithSalesforce(bc);
-                          },
+                        // Text: Login With
+                        Center(
+                          child: Text(
+                            'Login With',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                        LoginProviderWidget(
-                          name: widget.buttonNameGoogle,
-                          image: 'assets/appLoginPage/googleIcon.png',
-                          onTap: () async {
-                            loginWithGoogle();
-                          },
-                        ),
-                        LoginProviderWidget(
-                          name: widget.buttonNameOTP,
-                          image: 'assets/appLoginPage/dialerIcon.png',
-                          onTap: () async {
-                            loginWithOTP();
-                          },
+                        
+                        const SizedBox(height: 24.0),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            LoginProviderWidget(
+                              name: widget.buttonNameSalesforce,
+                              image: 'assets/appLoginPage/salesforceIcon.png',
+                              onTap: () async {
+                                BuildContext bc = context;
+                                loginWithSalesforce(bc);
+                              },
+                            ),
+                            LoginProviderWidget(
+                              name: widget.buttonNameGoogle,
+                              image: 'assets/appLoginPage/googleIcon.png',
+                              onTap: () async {
+                                loginWithGoogle();
+                              },
+                            ),
+                            LoginProviderWidget(
+                              name: widget.buttonNameOTP,
+                              image: 'assets/appLoginPage/dialerIcon.png',
+                              onTap: () async {
+                                loginWithOTP();
+                              },
+                            ),
+                          ],
                         ),
                       ],
                     ),

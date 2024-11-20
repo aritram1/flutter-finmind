@@ -36,8 +36,10 @@ class AppConstants{
   static const String LOGIN_PAGE_BUTTON_LOGIN_WITH_SALESFORCE = 'Login With Salesforce';
   static const String LOGIN_PAGE_BUTTON_LOGIN_WITH_GOOGLE = 'Login With Google';
   static const String LOGIN_PAGE_BUTTON_LOGIN_WITH_OTP = 'Login With OTP';
+  static const String LOGIN_PAGE_IMAGE_URL = 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
 
   static const int STATUS_CODE_OK = 200;
+  static const int STATUS_CODE_NOT_OK = 400;
 
   static const Map<String, List<dynamic>> ICON_LABEL_DATA = {
     'Aquarium' : ['Aquarium', Icons.water],
